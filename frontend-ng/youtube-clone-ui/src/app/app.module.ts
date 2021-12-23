@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UploadVideoComponent } from './upload-video/upload-video.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from "@angular/common/http"
+import { NgxFileDropModule } from "ngx-file-drop";
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { UploadVideoComponent } from './upload-video/upload-video.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    NgxFileDropModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
