@@ -1,5 +1,6 @@
 package com.borcze.angelov.youtubeclone.service;
 
+import com.borcze.angelov.youtubeclone.dto.UploadVideoResponse;
 import com.borcze.angelov.youtubeclone.dto.VideoDto;
 import com.borcze.angelov.youtubeclone.model.Video;
 import com.borcze.angelov.youtubeclone.repository.VideoRepository;
@@ -18,13 +19,14 @@ public class VideoService {
         this.videoRepository = videoRepository;
     }
 
-    public void uploadVideo(MultipartFile file) {
+    public UploadVideoResponse uploadVideo(MultipartFile file) {
         var videoUrl = s3Service.uploadFile(file);
 
         var video = new Video();
         video.setUrl(videoUrl);
 
-        videoRepository.save(video);
+        var savedVideo = videoRepository.save(video);
+        return new UploadVideoResponse(savedVideo.getId(), savedVideo.getUrl());
     }
 
     public VideoDto editVideo(VideoDto videoDto) {

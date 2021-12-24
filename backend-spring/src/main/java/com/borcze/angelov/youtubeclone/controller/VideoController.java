@@ -1,5 +1,6 @@
 package com.borcze.angelov.youtubeclone.controller;
 
+import com.borcze.angelov.youtubeclone.dto.UploadVideoResponse;
 import com.borcze.angelov.youtubeclone.dto.VideoDto;
 import com.borcze.angelov.youtubeclone.service.VideoService;
 
@@ -19,8 +20,8 @@ public class VideoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void uploadVideo(@RequestParam("file") MultipartFile file) {
-        videoService.uploadVideo(file);
+    public UploadVideoResponse uploadVideo(@RequestParam("file") MultipartFile file) {
+        return videoService.uploadVideo(file);
     }
 
     @PutMapping
