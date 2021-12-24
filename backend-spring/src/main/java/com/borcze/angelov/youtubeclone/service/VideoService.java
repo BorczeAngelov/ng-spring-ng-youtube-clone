@@ -28,9 +28,7 @@ public class VideoService {
     }
 
     public VideoDto editVideo(VideoDto videoDto) {
-
-        var savedVideo = videoRepository.findById(videoDto.getVideoId())
-                .orElseThrow(() -> new IllegalArgumentException("Cannot find video by id - " + videoDto.getVideoId()));
+        var savedVideo = getVideoById(videoDto.getVideoId());
 
         // Map the video Dto fileds to video
         savedVideo.setTitle(videoDto.getVideoName());
@@ -41,5 +39,21 @@ public class VideoService {
 
         videoRepository.save(savedVideo);
         return videoDto;
+    }
+
+    public String uploadThumbnail(MultipartFile file, String videoId) {
+
+        var video = getVideoById(videoId);
+        var thumbnailUrl = this.s3Service.uploadFile(file);
+
+        video.setThumbnailUrl(thumbnailUrl);
+        videoRepository.save(video);
+
+        return thumbnailUrl;
+    }
+
+    private Video getVideoById(String videoId) {
+        return videoRepository.findById(videoId)
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find video by id - " + videoId));
     }
 }

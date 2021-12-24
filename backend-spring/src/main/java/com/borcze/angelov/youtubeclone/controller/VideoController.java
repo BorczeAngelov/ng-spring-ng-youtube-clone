@@ -28,4 +28,13 @@ public class VideoController {
     public VideoDto editVideoMetadadta(@RequestBody VideoDto videoDto) {
         return this.videoService.editVideo(videoDto);
     }
+
+    @PostMapping("/thumbnail")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String uploadThumbnail(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("videoId") String videoId) {
+
+        return videoService.uploadThumbnail(file, videoId);
+    }
 }
