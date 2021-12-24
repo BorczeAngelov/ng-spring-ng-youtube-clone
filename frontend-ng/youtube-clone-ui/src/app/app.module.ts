@@ -1,19 +1,24 @@
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatFormFieldModule } from "@angular/material/form-field"
+import { MatInputModule } from "@angular/material/input"
+import { MatSelectModule } from "@angular/material/select"
+import { MatOptionModule } from "@angular/material/core"
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxFileDropModule } from "ngx-file-drop";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UploadVideoComponent } from './upload-video/upload-video.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from "@angular/common/http"
-import { NgxFileDropModule } from "ngx-file-drop";
-import { MatButtonModule } from "@angular/material/button";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatIconModule } from "@angular/material/icon";
 import { HeaderComponent } from './header/header.component';
-import { SaveVideoDetailsComponent } from './save-video-details/save-video-details.component'
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { SaveVideoDetailsComponent } from './save-video-details/save-video-details.component';
+import { UploadVideoComponent } from './upload-video/upload-video.component';
+
+
 
 @NgModule({
   declarations: [
@@ -25,6 +30,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
     NgxFileDropModule,
@@ -32,7 +38,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    FlexLayoutModule
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    FlexLayoutModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
