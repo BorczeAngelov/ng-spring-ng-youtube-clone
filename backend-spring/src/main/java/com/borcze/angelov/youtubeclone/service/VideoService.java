@@ -1,5 +1,6 @@
 package com.borcze.angelov.youtubeclone.service;
 
+import com.borcze.angelov.youtubeclone.dto.VideoDto;
 import com.borcze.angelov.youtubeclone.model.Video;
 import com.borcze.angelov.youtubeclone.repository.VideoRepository;
 
@@ -19,10 +20,26 @@ public class VideoService {
 
     public void uploadVideo(MultipartFile file) {
         var videoUrl = s3Service.uploadFile(file);
-        
+
         var video = new Video();
         video.setUrl(videoUrl);
 
         videoRepository.save(video);
+    }
+
+    public VideoDto editVideo(VideoDto videoDto) {
+
+        var savedVideo = videoRepository.findById(videoDto.getVideoId())
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find video by id - " + videoDto.getVideoId()));
+
+        // Map the video Dto fileds to video
+        savedVideo.setTitle(videoDto.getVideoName());
+        savedVideo.setDescription(videoDto.getDescription());
+        savedVideo.setUrl(videoDto.getUrl());
+        savedVideo.setTags(videoDto.getTags());
+        savedVideo.setVideoStatus(videoDto.getVideoStatus());
+
+        videoRepository.save(savedVideo);
+        return videoDto;
     }
 }

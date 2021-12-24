@@ -1,5 +1,6 @@
 package com.borcze.angelov.youtubeclone.controller;
 
+import com.borcze.angelov.youtubeclone.dto.VideoDto;
 import com.borcze.angelov.youtubeclone.service.VideoService;
 
 import org.springframework.http.HttpStatus;
@@ -20,5 +21,11 @@ public class VideoController {
     @ResponseStatus(HttpStatus.CREATED)
     public void uploadVideo(@RequestParam("file") MultipartFile file) {
         videoService.uploadVideo(file);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public VideoDto editVideoMetadadta(@RequestBody VideoDto videoDto) {
+        return this.videoService.editVideo(videoDto);
     }
 }
